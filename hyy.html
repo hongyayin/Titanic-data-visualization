@@ -5,19 +5,21 @@
     <script src="http://d3js.org/d3.v3.min.js"></script>
     <script src="http://dimplejs.org/dist/dimple.v2.0.0.min.js"></script>
       <style>
-        /* Title */
+        /* 标题样式 */
         h2 {
           text-align: center;
         }
-        /* Normal text */
-        body {
-          text-align: center;
+        /* 文本样式 */
+        p {
+          font-size: 12px;
         }
+        
+        /* 按钮样式 */
         div.xvalues_buttons {
           text-align: center;
           position:absolute;
-          left:60%;
-          top: 20%;        
+          top: 90px;
+          left:60%; 
         }
         .btn {
           color: #fff;
@@ -26,20 +28,22 @@
           height: 30px;
           width: 80px;
         }
-
+        body {
+          text-align: center;
+        }
       </style>
       <script type="text/javascript">
         function draw(data) {
 
           "use strict";
           var margin = 75,
-              width = 1400 - margin,
-              height = 600 - margin;
+              width = 900 - margin,
+              height = 400 - margin;
 
           d3.select('body')
             .append('h2')
             .text('泰坦尼克号乘客生存率')
-            .append("h6")
+            .append("p")
             .text('该数据集包含泰坦尼克号中891名乘客的基本信息，下图从性别、舱位（1是头等舱）和上船地点三个角度展示生还率的比例关系，其中蓝色表示死亡，灰色表示幸存。');
 
           var svg = d3.select("body")
@@ -49,14 +53,15 @@
             .append('g')
             .attr('class','chart');
 
+          //使用d3.nest()多级嵌套对各个因素中的不同情况下的存活人数和死亡人数进行统计
           function count(data, xvalue) {
             var nested = d3.nest()
                          .key(function(d) { return d[xvalue]; })
                          .key(function(d) { return d['Survived']; })
                          .rollup(function(leaves){return leaves.length; })
-                         .map(data);
+                         .map(data);  
 
-            if (xvalue == 'Sex'){
+            if (xvalue == 'Sex'){  
               var result = [
               {"Survived": "survived", "Sex": "female", "Num": nested['female']['1']},
               {"Survived": "survived", "Sex": "male", "Num": nested['male']['1']},
@@ -91,8 +96,7 @@
           update("Sex")
 
           function update(xvalue) {
-            //d3.select("body svg").selectAll("*").remove();
-          // Dimple.js Chart construction code
+          // 调用dimple.js来绘制堆积条形图
             var new_data = count(data, xvalue);
             var myChart = new dimple.chart(svg, new_data);
             var x = myChart.addCategoryAxis("x", xvalue); 
@@ -106,6 +110,7 @@
             
           };
 
+          //添加按钮
           var buttons = d3.select("body")
               .append("div")
               .attr("class","xvalues_buttons")
@@ -116,17 +121,17 @@
               .attr("class", "btn")
               .text(function(d) {return d;});
 
+          //按钮事件
           buttons.on("click",
             function(d) {
-              d3.select(".xvalues_buttons")//change the style to the origin one
+              d3.select(".xvalues_buttons")
               .selectAll("div")
               .transition()
               .duration(500);
 
-              d3.select(this)//change the style to a new one
+              d3.select(this)
               .transition()
               .duration(500);
-              // change flag
               svg.selectAll("*").remove();
               update(d);
             });
