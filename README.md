@@ -11,11 +11,12 @@
 分享在朋友圈和群里反馈的结果是对本次可视化的目的都能很好地了解，即各个因素与生存和死亡的比例关系，该图形能很好地展示，所以没有什么需要更改的地方。
 
 ## 发现：
-1、女性的存活率比男性的存活率高，这可能跟女士优先有关。
-2、舱位等级越高，存活率越高。
-3、从港口C出发的存活率比其他两个港口高。
+1.  女性的存活率比男性的存活率高，这可能跟女士优先有关。
+2.  舱位等级越高，存活率越高。
+3.  从港口C出发的存活率比其他两个港口高。
 
 ## 资源：
-1、D3.js API文档：https://github.com/d3/d3/wiki/API--%E4%B8%AD%E6%96%87%E6%89%8B%E5%86%8C
-2、Dimple.js文档：https://github.com/PMSI-AlignAlytics/dimple/wiki/dimple.chart#methods-1
-3、d3.nest 详解：https://blog.csdn.net/gdp12315_gu/article/details/51721988
+1.  D3.js API文档：https://github.com/d3/d3/wiki/API--%E4%B8%AD%E6%96%87%E6%89%8B%E5%86%8C
+2.  Dimple.js文档：https://github.com/PMSI-AlignAlytics/dimple/wiki/dimple.chart#methods-1
+3.  d3.nest 详解：https://blog.csdn.net/gdp12315_gu/article/details/51721988
+
